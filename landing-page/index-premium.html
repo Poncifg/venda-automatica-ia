@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venda Automática com IA - Curso Digital Premium</title>
+  <meta name="description" content="Aprenda a vender mais com WhatsApp, Instagram e Inteligência Artificial. Curso digital completo com templates, prompts de IA e automação prática.">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #0b1020 0%, #111827 45%, #1f2937 100%);
+      color: #f3f4f6;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* HEADER */
+    header {
+      background: rgba(11, 17, 31, 0.95);
+      border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, #a78bfa, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: #d1d5db;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #a78bfa;
+    }
+
+    .button-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c3aed, #a78bfa);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(124, 58, 237, 0.4);
+    }
+
+    .button-secondary {
+      display: inline-block;
+      background: transparent;
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .button-secondary:hover {
+      border-color: #a78bfa;
+      background: rgba(124, 58, 237, 0.1);
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 40px;
+      align-items: center;
+      padding: 100px 0 60px;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.8rem, 5vw, 4.8rem);
+      line-height: 1.08;
+      margin: 0 0 20px;
+      font-weight: 900;
+    }
+
+    .eyebrow {
+      background: rgba(124, 58, 237, 0.15);
+      border: 1px solid rgba(196, 181, 253, 0.4);
+      color: #c4b5fd;
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: #d1d5db;
+      margin-bottom: 26px;
+      line-height: 1.8;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #a78bfa;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: #d1d5db;
+      font-size: 0.9rem;
+    }
+
+    /* PRICE BOX */
+    .price-card {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(167, 139, 250, 0.05));
+      border: 2px solid rgba(124, 58, 237, 0.3);
+      border-radius: 24px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.2), transparent);
+      border-radius: 50%;
+      transform: translate(50%, -50%);
+    }
+
+    .price-label {
+      color: #a78bfa;
+      font-weight: 800;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .price-amount {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .price-period {
+      color: #d1d5db;
+      font-size: 1rem;
+      margin-bottom: 24px;
+    }
+
+    .price-description {
+      color: #d1d5db;
+      margin-bottom: 24px;
+      line-height: 1.8;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 24px 0;
+    }
+
+    .features-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #d1d5db;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .features-list li::before {
+      content: '✓';
+      color: #34d399;
+      font-weight: 800;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .guarantee {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #d1d5db;
+    }
+
+    /* SECTIONS */
+    .section {
+      padding: 80px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .section h2 {
+      font-size: clamp(2.2rem, 3vw, 3.5rem);
+      margin-bottom: 30px;
+      font-weight: 900;
+    }
+
+    .section-subtitle {
+      color: #d1d5db;
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      max-width: 800px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background: rgba(18, 27, 45, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    }
+
+    .card:hover {
+      border-color: rgba(124, 58, 237, 0.5);
+      background: rgba(18, 27, 45, 1);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(124, 58, 237, 0.15);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin: 16px 0 12px;
+      font-weight: 800;
+    }
+
+    .card p {
+      color: #d1d5db;
+      line-height: 1.8;
+    }
+
+    .icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(167, 139, 250, 0.1));
+      border-radius: 12px;
+      color: #a78bfa;
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .testimonial {
+      background: rgba(18, 27, 45, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .testimonial-text {
+      color: #e5e7eb;
+      margin-bottom: 18px;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      color: #d1d5db;
+      font-weight: 700;
+    }
+
+    /* FAQ */
+    .faq-item {
+      background: rgba(18, 27, 45, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .faq-question {
+      font-weight: 800;
+      color: #e5e7eb;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      color: #d1d5db;
+      margin-top: 12px;
+      line-height: 1.8;
+    }
+
+    /* FINAL CTA */
+    .final-cta {
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .final-box {
+      background: linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(167, 139, 250, 0.05));
+      border: 2px solid rgba(124, 58, 237, 0.3);
+      border-radius: 24px;
+      padding: 60px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .final-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .final-box p {
+      color: #d1d5db;
+      font-size: 1.1rem;
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+
+    /* FOOTER */
+    footer {
+      background: rgba(11, 17, 31, 0.8);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 40px 0 20px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 820px) {
+      .hero, .grid, .testimonials, .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .hero {
+        padding: 60px 0 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">Venda Automática com IA</div>
+      <div class="nav-links">
+        <a href="#beneficios" class="nav-link">Benefícios</a>
+        <a href="#conteudo" class="nav-link">Conteúdo</a>
+        <a href="#comprar" class="button-primary">Comprar agora</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero container">
+      <div class="hero-content">
+        <div class="eyebrow">Curso Premium + Templates + Automação</div>
+        <h1>Aprenda a vender mais com WhatsApp, Instagram e Inteligência Artificial.</h1>
+        <p class="hero-subtitle">
+          Descubra como organizar suas vendas, automatizar atendimento e converter mais clientes. Um método prático, testado e pronto para aplicar.
+        </p>
+
+        <div class="cta-row">
+          <a href="#comprar" class="button-primary">Comprar agora</a>
+          <a href="#beneficios" class="button-secondary">Ver benefícios</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-number">+100</span>
+            <span class="stat-label">Prompts de IA prontos</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">6</span>
+            <span class="stat-label">Módulos práticos</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Orientado à prática</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-label">Oferta especial</div>
+        <div class="price-amount">R$ 97</div>
+        <div class="price-period">ou em até 12x sem juros</div>
+        <div class="price-description">
+          Acesso total ao curso, templates, prompts e todos os materiais extras.
+        </div>
+
+        <ul class="features-list">
+          <li>6 módulos completos</li>
+          <li>Templates de WhatsApp</li>
+          <li>100+ prompts de IA</li>
+          <li>Página de vendas</li>
+          <li>Calendário de conteúdo</li>
+          <li>Ferramentas gratuitas</li>
+          <li>Materiais e bônus</li>
+        </ul>
+
+        <a href="#comprar" class="button-primary" style="width: 100%; text-align: center;">Comprar agora</a>
+
+        <div class="guarantee">
+          ✓ Garantia de satisfação de 30 dias ou seu dinheiro de volta
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEMA -->
+    <section class="section container">
+      <h2>O verdadeiro problema</h2>
+      <p class="section-subtitle">
+        Muitas pessoas têm boa oferta, mas perdem vendas por pequenos detalhes que comprometem toda a estratégia.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">❌</div>
+          <h3>Atendimento lento</h3>
+          <p>Clientes perdem interesse esperando resposta. A primeira impressão é tudo.</p>
+        </div>
+        <div class="card">
+          <div class="icon">❌</div>
+          <h3>Mensagens sem estratégia</h3>
+          <p>Mensagens genéricas não convertem. Falta foco em problema e solução.</p>
+        </div>
+        <div class="card">
+          <div class="icon">❌</div>
+          <h3>Falta de follow-up</h3>
+          <p>Leads interessados são esquecidos. A venda se perde na falta de seguimento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUÇÃO -->
+    <section class="section container" id="beneficios">
+      <h2>A solução: Venda Automática com IA</h2>
+      <p class="section-subtitle">
+        Um método prático que transforma seu processo de vendas em algo simples, profissional e eficiente.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">✓</div>
+          <h3>Fundamentos que vendem</h3>
+          <p>Aprenda a criar uma oferta clara, entender as dores do cliente e estruturar um funil simples que converte.</p>
+        </div>
+        <div class="card">
+          <div class="icon">✓</div>
+          <h3>WhatsApp como máquina de vendas</h3>
+          <p>Respostas automáticas, qualificação de clientes e follow-up em sequência. Mensagens que convertem de verdade.</p>
+        </div>
+        <div class="card">
+          <div class="icon">✓</div>
+          <h3>Instagram para conversão</h3>
+          <p>Conteúdo com estratégia. Atraia atenção, gere interesse e transforme seguidores em clientes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTEÚDO -->
+    <section class="section container" id="conteudo">
+      <h2>O que você vai receber</h2>
+      <p class="section-subtitle">
+        6 módulos práticos + templates + prompts de IA + ferramentas + materiais extras + suporte por 30 dias.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="icon">📚</div>
+          <h3>Módulo 1: Fundamentos</h3>
+          <p>Estrutura de venda, funil simples, escolha de oferta, erros comuns que te fazem perder vendas.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💬</div>
+          <h3>Módulo 2: WhatsApp</h3>
+          <p>Boas-vindas, qualificação, apresentação, fechamento e follow-up. Templates prontos para copiar.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📱</div>
+          <h3>Módulo 3: Instagram</h3>
+          <p>Posts que vendem, stories com CTA, reels com autoridade, dm automático, calendário de conteúdo.</p>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: 28px;">
+        <div class="card">
+          <div class="icon">🤖</div>
+          <h3>Módulo 4: Prompts de IA</h3>
+          <p>100+ prompts prontos para criar anúncios, atendimento, follow-up e conteúdo viral usando IA.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🔧</div>
+          <h3>Módulo 5: Funil de Vendas</h3>
+          <p>Atração, tráfego gratuito, lead magnet, email automático, página de vendas high-converting.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚙️</div>
+          <h3>Módulo 6: Automação</h3>
+          <p>Zapier, Make, integrações WhatsApp + Instagram + Email, relatórios automáticos, escalação.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="section container">
+      <h2>Resultados reais de pessoas que aplicam</h2>
+
+      <div class="testimonials">
+        <div class="testimonial">
+          <div class="testimonial-text">"Finalmente entendi como organizar minha venda com clareza e usar ferramentas sem complicar demais."</div>
+          <div class="testimonial-author">— Cliente Digital</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-text">"O material me ajudou a transformar meu atendimento em algo mais profissional, objetivo e que gera mais conversões."</div>
+          <div class="testimonial-author">— Pequeno Empreendedor</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-text">"A parte de prompts e mensagens prontas foi o que mais me salvou no dia a dia. Pude começar a vender no mesmo dia."</div>
+          <div class="testimonial-author">— Produtor de Conteúdo</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section container">
+      <h2>Dúvidas frequentes</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>O produto é para iniciantes?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Sim. O conteúdo foi pensado para pessoas que querem começar de forma simples, sem precisar ser especialista em tecnologia ou marketing.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Preciso aparecer no vídeo ou mostrar o rosto?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Não. O material pode ser usado sem necessidade de aparecer em vídeo. O foco é no conteúdo, na entrega e no valor.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Posso vender em todas as plataformas?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Sim. O conteúdo, os templates e as estratégias podem ser adaptados para Hotmart, Kiwify, Eduzz, Monetizze e outras plataformas.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Funciona para pequenos negócios?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Sim. A estratégia pode ser usada por freelancers, autônomos, comerciantes, consultores e criadores online. É escalável.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Preciso de ferramentas pagas?</span>
+          <span>+</span>
+        </div>
+        <div class="faq-answer">
+          Não. Há uma parte importante dedicada a ferramentas gratuitas e versões simples para começar sem investimento.
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta container" id="comprar">
+      <div class="final-box">
+        <h2>Comece hoje e transforme suas vendas</h2>
+        <p>
+          Acesse o produto completo e receba tudo em um só lugar: 6 módulos, templates, prompts de IA, estratégias práticas e materiais extras. Suporte por 30 dias e atualizações gratuitas.
+        </p>
+        <a href="#" class="button-primary" style="font-size: 1.1rem; padding: 18px 40px;">Clique para comprar agora</a>
+
+        <p style="margin-top: 20px; font-size: 0.9rem;">
+          ✓ Garantia de satisfação de 30 dias | ✓ Acesso imediato | ✓ Suporte incluído
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Venda Automática com IA. Todos os direitos reservados.</p>
+      <p>Este produto é destinado a uso pessoal. Proibido compartilhamento, revenda ou distribuição não autorizada.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const faq = button.closest('.faq-item');
+        const answer = faq.querySelector('.faq-answer');
+        answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
